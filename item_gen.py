@@ -81,7 +81,7 @@ with open('item_data_seed.json') as json_file:
 		while isRepeat == True :
 			flavor = ""
 			#business rule is we want to pick flavors instead of herb or spice most of the time
-			whichFlavor = random.choice([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+			whichFlavor = random.randint(1, 10)
 			if whichFlavor <= 6:
 				flavor = random.choice(data[keyFlavors])
 			elif whichFlavor == 7 or whichFlavor == 8:
