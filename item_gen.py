@@ -2,6 +2,9 @@
 # Author:  Aaron LaBeau
 # Date:  06/27/2022
 #
+# generates items based on https://www.tpc.org/tpc_documents_current_versions/pdf/tpc-c_v5.11.0.pdf
+# see page 65
+# 
 # DEPENDENCIES:
 # pip3 install -U jsonpickle 
 #
@@ -28,7 +31,7 @@ with open('item_data_seed.json') as json_file:
 		def __init__(self, name, description):
 			self.itemId = str(uuid.uuid4()) 
 			self.name = name
-			self.price = round(random.uniform(4.00, 25.00), 2)
+			self.price = round(random.uniform(1.00, 100.00), 2)
 			self.description = description
 			self.documentType = "item"
 		def printItem(self):
@@ -53,9 +56,26 @@ with open('item_data_seed.json') as json_file:
 	keyPrefix = "prefix"
 	keyName = "name"
 	keySuffix = "suffix"
+
+	#lists to hold values until they can be serialized
 	beerName = []
 	beerItems = []
 
+	#used to get indexes for random injection of the word ORIGINAL which must be in 
+	# 10% of the items randomly 
+	randomOriginIndex = []
+	randomOriginCounter = 0
+	isTenPercentFull = False	
+	print ("Getting random indexes for ORIGINAL in description")
+	while isTenPercentFull == False:
+		randomIndex = random.randint(0, 100000)
+		if randomIndex not in randomOriginIndex:
+			randomOriginIndex.append(randomIndex)
+			randomOriginCounter = randomOriginCounter + 1
+		if howManyItems / randomOriginCounter <= 10:
+			isTenPercentFull = True
+
+	print ("Generating Data")
 	for index in range(howManyItems):
 		isRepeat = True 
 		while isRepeat == True :
@@ -73,16 +93,26 @@ with open('item_data_seed.json') as json_file:
 			name = random.choice (data[keyName])	
 			suffix = random.choice(data[keySuffix])
 			genItemName = flavor + " " + name + " " + suffix
-			genItemDescription = prefix + " " + suffix + " with " + flavor + " flavors" 
+
+			#calculate adding in ORIGINAL for 10% of records
+			if index in randomOriginIndex:
+				genItemDescription = prefix + " " + suffix + " ORIGINAL with " + flavor + "flavors"
+			else:
+				genItemDescription = prefix + " " + suffix + " with " + flavor + " flavors" 
+
 			if genItemName not in beerName:
 				beerName.append(genItemName)
 				beerItems.append(BeerItem(genItemName, genItemDescription))
 				isRepeat = False
 
 	#serialize to json
+	print ("Serializing Data")
 	json_objects = jsonpickle.encode(beerItems, unpicklable=False) 
 
+	print ("Writing to Disk")
 	#writing items to disk
 	with open("beer_items.json", "w") as outfile:
 		outfile.write(json_objects)
+
+	print ("Data Generation Completed")
 
