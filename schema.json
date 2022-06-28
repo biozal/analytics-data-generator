@@ -71,6 +71,7 @@
 		"itemId": "",
 		"name": "",
 		"price": "",
-		"data": ""
+		"description": "",
+		"documentType": "item"
 	}
 ]
