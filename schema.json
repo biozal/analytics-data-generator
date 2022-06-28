@@ -1,0 +1,76 @@
+[ 
+	{
+		"warehouseId": "",
+		"name": "",
+		"address1": "",
+		"address2": "",
+		"city": "",
+		"state": "",
+		"postalCode": "",
+		"salesTax": 0.000,
+		"yearToDateBalance": 0.00,
+		"latitude": 0.00,
+		"longitude": -0.00,
+		"documentType": "warehouse"
+	},
+	{
+		"districtId": "",
+		"warehouseId": "",
+		"name": "",
+		"address1": "",
+		"address2": "",
+		"city": "",
+		"state": "",
+		"postalCode": "",
+		"salesTax": 0.06,
+		"yearToDateBalance": 0.00,
+		"nextOrderId": "",
+		"documentType": "district"
+	},
+	{
+		"customerId": "",
+		"warehouseId": "",
+		"districtId": "",
+		"givenName": "",
+		"middleName": "",
+		"surname": "",
+		"address1": "",
+		"address2": "",
+		"city": "",
+		"state": "",
+		"postalCode": "",
+		"phoneNumber": "",
+		"mobileNumber": "",
+		"customerSince": "1900/00/00", 
+		"credit": "GC",
+		"creditLimit": 0.00,
+		"discount": 0.0,
+		"balance": 0.00,
+		"yearToDatePayments": 0.00,
+		"paymentCount": 0,
+		"deliveryCount": 0,
+		"notes": "",
+		"documentType": "customer"
+	},
+	{
+		"customerId": "",
+		"districtId": "",
+		"warehouseId": "",
+		"date": "1900/01/01 00:00:00",
+		"amount": 0.00,
+		"notes": "",
+		"documentType": "history"
+	},
+	{
+		"orderId": "",
+		"districtId": "",
+		"warehouseId": "",
+		"documentType": "newOrder"
+	},
+	{
+		"itemId": "",
+		"name": "",
+		"price": "",
+		"data": ""
+	}
+]
